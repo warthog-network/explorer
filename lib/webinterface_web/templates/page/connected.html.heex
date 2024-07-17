@@ -1,0 +1,17 @@
+<h1>Active Connections</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Peer IP</th>
+      <th>Connected Since</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for %{"ip" => ip, "connected_at" => conn_at}<- @list do %>
+    <tr>
+      <td><%= ip %></td>
+      <td><%= conn_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

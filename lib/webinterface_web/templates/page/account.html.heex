@@ -1,0 +1,108 @@
+<div class="bg-lightest-blue ba br3 pa2 ma1 tc">
+  <canvas id="canvas" width="70" height="70"></canvas>
+  <script charset="utf-8">
+    function hexToBytes(hex) {
+    for (var bytes = [], c = 0; c < hex.length; c += 2)
+        bytes.push(parseInt(hex.substr(c, 2), 8));
+    return bytes;
+}
+    function drawdot(ctx, i,j,hexdigit) {
+  var x = 10*i
+  var y = 10*j
+ var index = parseInt(hexdigit, 16)
+    var cga =["#000000" ,"#555555" ,"#0000AA" ,"#5555FF" ,"#00AA00" ,"#55FF55" ,"#00AAAA" ,"#55FFFF" ,"#AA0000" ,"#FF5555" ,"#AA00AA" ,"#FF55FF" ,"#AA5500" ,"#FFFF55" ,"#AAAAAA" ,"#FFFFFF"]
+    var color = cga[index]
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 10, 10);
+    }
+    function draw(hex) {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+for (let i = 0; i < 5; i++) {
+for (let j = 0; j < 5; j++) {
+  drawdot(ctx,i+1,j+1,hex.substr(i+5*j, 1))
+} 
+} 
+  drawdot(ctx,0,0,hex.substr(25, 1))
+  drawdot(ctx,1,0,hex.substr(25, 1))
+  drawdot(ctx,0,1,hex.substr(25, 1))
+  drawdot(ctx,2,0,hex.substr(26, 1))
+  drawdot(ctx,3,0,hex.substr(27, 1))
+  drawdot(ctx,4,0,hex.substr(28, 1))
+  drawdot(ctx,5,0,hex.substr(29, 1))
+  drawdot(ctx,6,0,hex.substr(29, 1))
+  drawdot(ctx,6,1,hex.substr(29, 1))
+
+  drawdot(ctx,6,2,hex.substr(30, 1))
+  drawdot(ctx,6,3,hex.substr(31, 1))
+  drawdot(ctx,6,4,hex.substr(32, 1))
+
+
+  drawdot(ctx,6,5,hex.substr(33, 1))
+  drawdot(ctx,6,6,hex.substr(33, 1))
+  drawdot(ctx,5,6,hex.substr(33, 1))
+
+  drawdot(ctx,4,6,hex.substr(34, 1))
+  drawdot(ctx,3,6,hex.substr(35, 1))
+  drawdot(ctx,2,6,hex.substr(34, 1))
+
+  drawdot(ctx,1,6,hex.substr(36, 1))
+  drawdot(ctx,0,6,hex.substr(36, 1))
+  drawdot(ctx,0,5,hex.substr(36, 1))
+
+  drawdot(ctx,0,4,hex.substr(37, 1))
+  drawdot(ctx,0,3,hex.substr(38, 1))
+  drawdot(ctx,0,2,hex.substr(39, 1))
+  }
+}
+draw("<%= @address %>")
+    
+  </script>
+  <h1>Address <%= @address %></h1>
+  <h2>Balance: <%= @data["balance"] %> WART</h2>
+  <h2>
+    <%= link_account(@conn,@address, max(0,@data["fromId"]-100),"◀ ") %>
+    <%= link_account(@conn,@address, @data["fromId"]+100,"▶ ") %>
+
+  Transactions</h2>
+  <table>
+  <thead>
+    <tr>
+      <th>Block</th>
+      <th>TxHash</th>
+      <th>from</th>
+      <th>Amount</th>
+      <th>Fee</th>
+      <th>To</th>
+    </tr>
+  </thead>
+    <tbody>
+      <%= for b <- @data["perBlock"] do %>
+        <% height = b["height"] %>
+        <% txs = b["transactions"] %>
+        <%= for r <- txs["rewards"] do %>
+          <tr>
+            <td><%= link_block(@conn,height) %></td>
+            <td><%= link_txhash(@conn,r["txHash"]) %></td>
+            <td></td>
+            <td><%= r["amount"] %></td>
+            <td></td>
+            <td><%= link_address(@conn,r["toAddress"]) %></td>
+          </tr>
+        <% end %>
+        <%= for r <- txs["transfers"] do %>
+          <tr>
+            <td><%= link_block(@conn,height) %></td>
+            <td><%= link_txhash(@conn,r["txHash"]) %></td>
+            <td> <%= link_address(@conn,r["fromAddress"]) %></td>
+            <td><%= r["amount"] %></td>
+            <td><%= r["fee"] %></td>
+            <td><%= link_address(@conn,r["toAddress"]) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,20 @@
+<h1>Banned node</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Peer IP</th>
+      <th>Ban reason</th>
+      <th>Expires</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for %{"ip" => ip, "reason" => reason, "expires" => expires}<- @list do %>
+    <tr>
+      <td><%= ip %></td>
+      <td><%= reason %></td>
+      <td><%= expires %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  
+</table>

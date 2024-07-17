@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= csrf_meta_tag() %>
+    <%= live_title_tag assigns[:page_title] || "Webinterface", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+  </head>
+  <body>
+    <header>
+      <div class="flex w100 justify-between bg-dark-blue bb bw2 b--navy white">
+        <div class="tl flex wa ma1 ba">
+          <svg width="50" height="50" class="ma1">
+            <circle cx="25" cy="25" r="20" stroke="yellow" stroke-width="4" fill="white" />
+          </svg>
+          <div class="helvetica ma1 pa0 v-btm">
+            <div class="mv1">
+              Warthog!
+            </div>
+            <div>
+              Explorer!
+            </div>
+          </div>
+        </div>
+        <h1 class="tc f1 fw6 lh-title mt1 mb2 b--black-20 ba">
+          Warthog! Explorer
+        </h1>
+        <div class="tr flex ma2 ba">
+        <%= form_for @conn, Routes.page_path(@conn, :balance),  [method: :get], fn f -> %>
+    <label>
+      Address: <%= text_input f, :address %>
+    </label>
+    <%= submit "/chain/balance" %>
+    <% end %>
+        </div>
+      </div>
+      <section class="helvetica ">
+      </section>
+      <li>
+</li>
+    </header>
+    <%= @inner_content %>
+  </body>
+</html>

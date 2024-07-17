@@ -1,0 +1,84 @@
+<div class="bg-lightest-blue ba br3 pa2 ma1 tc">
+<% height = @block["height"] %>
+<h1><%= link_block(@conn,max(0,height-1),"◀") %> Block <%= height %> <%= link_block(@conn,height+1,"▶") %></h1>
+<h2>Header</h2>
+<% header= @block["header"] %>
+<table>
+  <thead>
+    <tr>
+      <td>Merkle root:</td> 
+      <td> <%= header["merkleroot"] %></td>
+    </tr>
+    <tr>
+      <td>Hash:</td> 
+      <td> <%= header["hash"] %></td>
+    </tr>
+    <tr>
+      <td>Nonce:</td> 
+      <td> <%= header["nonce"] %></td>
+    </tr>
+    <tr>
+      <td>Previous Hash:</td> 
+      <td> <%= header["prevHash"] %></td>
+    </tr>
+    <tr>
+      <td>Timestamp:</td> 
+      <td> <%= header["timestamp"] %></td>
+    </tr>
+    <tr>
+      <td>Target:</td> 
+      <td> <%= header["target"] %></td>
+    </tr>
+    <tr>
+      <td>Version:</td> 
+      <td> <%= header["version"] %></td>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<h2>Body</h2>
+<% body = @block["body"] %>
+<h3>Mining Reward</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Address</th> 
+      <th>Amount</th> 
+      <th>TxHash</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <%= for item <- body["rewards"] do %>
+    <tr>
+      <td> <%= link_address(@conn,item["toAddress"]) %></td>
+      <td> <%= item["amount"] %></td>
+      <td> <%= link_txhash(@conn,item["txHash"]) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<h3>Transfers</h3>
+<table>
+  <thead>
+    <tr>
+      <th>From</th> 
+      <th>To</th> 
+      <th>Amount</th> 
+      <th>Fee</th> 
+      <th>TxHash</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <%= for item <- body["transfers"] do %>
+    <tr>
+      <td> <%= link_address(@conn,item["fromAddress"]) %></td>
+      <td> <%= link_address(@conn,item["toAddress"]) %></td>
+      <td> <%= item["amount"] %></td>
+      <td> <%= item["fee"] %></td>
+      <td> <%= link_txhash(@conn,item["txHash"]) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

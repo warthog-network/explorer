@@ -1,0 +1,80 @@
+<div class="bg-lightest-blue ba br3 pa2 ma1 tc">
+  <% t = @tx["transaction"] %>
+<h1>Transaction Details</h1>
+<h2><%= t["txHash"] %></h2>
+<table>
+  <% type = t["type"] %>
+  <tbody>
+    <%= cond do %>
+      <%  type == "Reward"-> %>
+      <tr>
+        <th>Transaction Type</th>
+        <td>Mining Reward</td>
+      </tr>
+      <tr>
+        <th>Height</th>
+        <td><%= link_block(@conn,t["blockHeight"]) %></td>
+      </tr>
+      <tr>
+        <th>Address</th>
+        <td><%= link_address(@conn,t["toAddress"]) %></td>
+      </tr>
+      <tr>
+        <th>Amount</th>
+        <td><%= t["amount"] %></td>
+      </tr>
+      <tr>
+        <th>Confirmations</th>
+        <td><%= t["confirmations"] %></td>
+      </tr>
+      <tr>
+        <th>Timestamp</th>
+        <td><%= t["timestamp"] %></td>
+      </tr>
+      <%  type == "Transfer"-> %>
+      <tr>
+        <th>Transaction Type</th>
+        <td>Transfer</td>
+      </tr>
+      <tr>
+        <th>Height</th>
+        <td><%= link_block(@conn,t["blockHeight"]) %></td>
+      </tr>
+      <tr>
+        <th>From Address</th>
+        <td><%= link_address(@conn,t["fromAddress"]) %></td>
+      </tr>
+      <tr>
+        <th>To Address</th>
+        <td><%= link_address(@conn,t["toAddress"]) %></td>
+      </tr>
+      <tr>
+        <th>Amount</th>
+        <td><%= t["amount"] %></td>
+      </tr>
+      <tr>
+        <th>Confirmations</th>
+        <td><%= t["confirmations"] %></td>
+      </tr>
+      <tr>
+        <th>Transaction Id</th>
+        <td><%= link_txhash(@conn,t["txHash"]) %></td>
+      </tr>
+      <tr>
+        <th>Timestamp</th>
+        <td><%= t["timestamp"] %></td>
+      </tr>
+      <tr>
+        <th>Nonce Id</th>
+        <td><%= t["nonceId"] %></td>
+      </tr>
+      <tr>
+        <th>Pin Height</th>
+        <td><%= t["pinHeight"] %></td>
+      </tr>
+      <% true -> %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+

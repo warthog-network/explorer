@@ -1,0 +1,16 @@
+<h1>Endpoints</h1>
+<ul>
+
+<li><%= link "/chain/head", to: Routes.page_path(@conn,:head) %></li>
+<li><%= form_for @conn, Routes.page_path(@conn, :balance),  [method: :get], fn f -> %>
+    <label>
+      Address: <%= text_input f, :address %>
+    </label>
+    <%= submit "/chain/balance" %>
+    <% end %>
+</li>
+
+<li><%= link "/peers/banned", to: Routes.page_path(@conn,:banned) %></li>
+<li><%= link "/peers/connected", to: Routes.page_path(@conn,:connected) %></li>
+  
+</ul>
