@@ -18,15 +18,15 @@
           </svg>
           <div class="helvetica ma1 pa0 v-btm">
             <div class="mv1">
-              Warthog!
+              Warthog
             </div>
             <div>
-              Explorer!
+              Explorer
             </div>
           </div>
         </div>
         <h1 class="tc f1 fw6 lh-title mt1 mb2 b--black-20 ba">
-          Warthog! Explorer
+        <%= link "Warthog Explorer", to: Routes.page_path(@conn,:explorer), class: "white" %>
         </h1>
         <div class="tr flex ma2 ba">
         <%= form_for @conn, Routes.page_path(@conn, :lookup),  [method: :get], fn f -> %>

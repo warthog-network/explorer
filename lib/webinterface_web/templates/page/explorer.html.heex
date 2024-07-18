@@ -1,4 +1,4 @@
-<h1>Block <%= @latest["height"] %></h1>
+<h1>Latest Block <%= @latest["height"] %></h1>
 <h2>Header</h2>
 <% header= @latest["header"] %>
 <table>
@@ -84,4 +84,3 @@
   </tbody>
 </table>
 
-<%= inspect(body["transfers"]) %>
