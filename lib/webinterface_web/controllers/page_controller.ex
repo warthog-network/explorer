@@ -13,7 +13,7 @@ defmodule WebinterfaceWeb.PageController do
     render(conn, "block.html", block: b)
   end
 
-  def account(conn, %{"address" => address} = params) do
+  def lookup(conn, %{"address" => address} = params) do
     {from, ""} = Map.get(params, "from", "1000000000000000000") |> Integer.parse()
     before = from + 100
     {:ok, data} = Nodestate.history(address, before)

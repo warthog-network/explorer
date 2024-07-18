@@ -12,9 +12,9 @@ defmodule WebinterfaceWeb.PageView do
 
   def link_address(conn, address) do
     label = String.slice(address, 0..3)<>"..."<>String.slice(address, -4..-1)
-    link(label, to: Routes.page_path(conn, :account, address))
+    link(label, to: Routes.page_path(conn, :lookup, address: address))
   end
   def link_account(conn, address, from, label) do
-    link(label, to: Routes.page_path(conn, :account, address, from: from))
+    link(label, to: Routes.page_path(conn, :lookup, address: address, from: from))
   end
 end

@@ -19,7 +19,7 @@ defmodule WebinterfaceWeb.Router do
 
     get "/", PageController, :explorer
     get "/block/:height", PageController, :block
-    get "/account/:address", PageController, :account
+    get "/lookup", PageController, :lookup
     get "/transaction/:txhash", PageController, :transaction
     # get "/", PageController, :index
     get "/chain/head", PageController, :head

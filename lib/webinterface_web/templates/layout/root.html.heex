@@ -29,11 +29,11 @@
           Warthog! Explorer
         </h1>
         <div class="tr flex ma2 ba">
-        <%= form_for @conn, Routes.page_path(@conn, :balance),  [method: :get], fn f -> %>
+        <%= form_for @conn, Routes.page_path(@conn, :lookup),  [method: :get], fn f -> %>
     <label>
       Address: <%= text_input f, :address %>
     </label>
-    <%= submit "/chain/balance" %>
+    <%= submit "go" %>
     <% end %>
         </div>
       </div>
